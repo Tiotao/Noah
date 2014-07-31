@@ -1,0 +1,87 @@
+extends layout
+
+block content
+
+	.container
+		.page-header.text-center
+			h1
+				span.fa.fa-anchor Profile Page
+				a.btn.btn-default.btn-sm(href="/logout") Logout
+		.row
+			.col-sm-6
+				.well
+					h3
+						span.fa.fa-user  
+							=user.data.username
+						
+					p
+						strong id 
+						=user.id
+					p
+						strong name 
+						=user.data.name
+					p
+						strong email 
+						=user.data.email
+					p
+						strong twitter 
+						=user.data.twitter_account
+						a(href="/auth/twitter") Link Twitter
+					p
+						strong Fitbit 
+						=user.data.fitbit_account
+						a(href="/auth/fitbit") Link Fitbit
+					p
+						strong target 
+						=user.data.target
+					p
+						strong alert time 
+						=user.data.alert_time
+					p
+						strong send time 
+						=user.data.send_time
+					p
+						strong last appear 
+						=user.data.last_activate
+					p
+						strong create at 
+						=user.data.create_time
+					p
+						strong password 
+						=user.data.password
+					p
+						strong status 
+						=user.data.status
+			.col-sm-6
+				.well
+					h3
+						span.fa.fa-star  Arks
+					.row
+						each ark in arks
+							.col-sm-12
+								h4 Ark #{ark.ark.id}
+										
+								p
+									strong content 
+									=ark.ark.data.content
+
+								form(action="/ark/modify/#{ark.ark.id}", method="post")
+									.form-group
+										textarea.form-control(row="3", name="content")
+									button.btn.btn-default.btn-sm(type="submit") Modify
+									a.btn.btn-default.btn-sm(href="/ark/delete/#{ark.ark.id}") Delete Ark
+					
+					hr
+
+					h3
+						span.fa.fa-circle  Build New Ark
+
+					.row
+						.col-sm-12
+							form(action="/ark/create", method="post")
+								.form-group
+									label content
+									textarea.form-control(row="3", name="content")
+								button.btn.btn-warning.btn-lg(type="submit") Submit
+									
+
